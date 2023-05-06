@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  semester: 1
+  title: MyString
+  description: MyText
+  date: 2023-05-06
+  url: MyString
+  active: false
+
+two:
+  semester: 1
+  title: MyString
+  description: MyText
+  date: 2023-05-06
+  url: MyString
+  active: false
