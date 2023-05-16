@@ -3,9 +3,16 @@ class ContestsController < ApplicationController
 
   # GET /contests
   def index
-    @contests = Contest.all
+    # debugger
+    sleep 1
+    @contests = Contest.order(Arel.sql("CASE WHEN date >= '#{Date.today}' THEN 0 ELSE 1 END, CASE WHEN date >= '#{Date.today}' THEN date END ASC, CASE WHEN date < '#{Date.today}' THEN date END DESC"))
+    if params[:query]
+      query = params[:query]
+      @contests = @contests.where("LOWER(title) LIKE ? OR LOWER(description) LIKE ?", "%#{query.downcase}%", "%#{query.downcase}%")
+    end
+    @contests = @contests.page(params[:page] || 1).per(12)
 
-    render json: @contests
+    # render json: { contests: @contests, total_count: @contests.total_count },  status: :ok
   end
 
   # GET /contests/1

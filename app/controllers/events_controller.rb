@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
 
 
-  
+
   def by_month
     @colors = {
       notice: 'orange',
@@ -15,7 +15,7 @@ class EventsController < ApplicationController
     @contests = Contest.where(date: (Date.new(year, month, 1)..Date.new(year, month, -1)))
 
     events = []
-    
+
     @timetables.each do |single|
       temp = {
         id: single.id,
@@ -58,8 +58,8 @@ class EventsController < ApplicationController
       }
       events << temp
     end
-    
-    render json: events, status: 200  
+
+    render json: events, status: 200
 
   end
 

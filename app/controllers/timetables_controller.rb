@@ -3,9 +3,20 @@ class TimetablesController < ApplicationController
 
   # GET /timetables
   def index
-    @timetables = Timetable.all
+     # debugger
+    sleep 2
+    @timetables = Timetable.where(date: Date.today..).order(:date)
+    if params[:query]
+      query = params[:query]
+      @timetables = @timetables.where("LOWER(title) LIKE ? OR LOWER(description) LIKE ?", "%#{query.downcase}%", "%#{query.downcase}%")
+    end
+    if params[:semester]
+      @timetables = @timetables.where(semester: params[:semester])
+    end
+    @timetables = @timetables.page(params[:page] || 1).per(12)
 
-    render json: @timetables
+    render json: { timeTables: @timetables, total_count: @timetables.total_count },  status: :ok
+
   end
 
   # GET /timetables/1

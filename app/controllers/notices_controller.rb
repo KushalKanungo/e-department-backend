@@ -15,6 +15,7 @@ class NoticesController < ApplicationController
 
   # POST /notices
   def create
+    # debugger
     @notice = Notice.new(notice_params)
 
     if @notice.save
