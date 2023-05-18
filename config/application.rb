@@ -12,6 +12,8 @@ module EDepartBackend
     config.load_defaults 7.0
     config.time_zone = 'Kolkata'
     config.active_record.default_timezone = :local
+    config.middleware.use ActionDispatch::Session::CookieStore
+
 
     # Configuration for the application, engines, and railties goes here.
     #

@@ -4,7 +4,7 @@ require 'googleauth'
 
 class AuthService
 
-  def verify(access_token)
+  def self.verify(access_token)
     Google::Auth::IDTokens.verify_oidc access_token, aud: "101242721034-svf9du5sbf1rehbmjqukg907v03p25dt.apps.googleusercontent.com"
   end
 

@@ -5,7 +5,7 @@ class TimetablesController < ApplicationController
   def index
      # debugger
     sleep 2
-    @timetables = Timetable.where(date: Date.today..).order(:date)
+    @timetables = Timetable.order(Arel.sql("CASE WHEN date >= '#{Date.today}' THEN 0 ELSE 1 END, CASE WHEN date >= '#{Date.today}' THEN date END ASC, CASE WHEN date < '#{Date.today}' THEN date END DESC"))
     if params[:query]
       query = params[:query]
       @timetables = @timetables.where("LOWER(title) LIKE ? OR LOWER(description) LIKE ?", "%#{query.downcase}%", "%#{query.downcase}%")

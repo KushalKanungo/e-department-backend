@@ -11,7 +11,7 @@ class ContestsController < ApplicationController
       @contests = @contests.where("LOWER(title) LIKE ? OR LOWER(description) LIKE ?", "%#{query.downcase}%", "%#{query.downcase}%")
     end
     @contests = @contests.page(params[:page] || 1).per(12)
-
+    @total_count = @contests.total_count
     # render json: { contests: @contests, total_count: @contests.total_count },  status: :ok
   end
 
