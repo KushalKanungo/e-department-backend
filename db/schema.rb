@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_05_213708) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_29_150422) do
   create_table "contests", force: :cascade do |t|
     t.string "title"
     t.datetime "date", precision: nil
@@ -40,6 +40,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_213708) do
     t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "name"
+    t.boolean "isAdmin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end
